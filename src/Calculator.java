@@ -112,7 +112,7 @@ public class Calculator {
 				
 			}
 			
-			return fileName;
+		return fileName;
 	}
 			
 	//Calculate and MEDIAN
@@ -120,16 +120,22 @@ public class Calculator {
 			
 		double median = 0.0;
 		int index = 0;
-			
-		if((dataArray.length % 2) == 0){
+		
+		try{
+			if((dataArray.length % 2) == 0){
 				
-			median = (dataArray[dataArray.length] + dataArray[dataArray.length + 1]) / 2;		
+				median = ((dataArray[dataArray.length/2]) + (dataArray[(dataArray.length /2) - 1])) / 2;		
+			}
+			else{
+				index = dataArray.length / 2;			
+				median = dataArray[index];
+			}
 		}
-		else{
-			index = dataArray.length / 2;			
-			median = dataArray[index];
-		}
+		catch(Exception ex){
 			
+			System.out.println(String.format("Error: %s\nArray length: %d", ex.toString(), dataArray.length));
+		}
+		
 		return median;
 	}
 		
