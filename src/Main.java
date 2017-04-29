@@ -2,7 +2,8 @@ import java.io.BufferedReader;
 //import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.stream.DoubleStream;
+import java.util.Scanner;
+//import java.util.stream.DoubleStream;
 //import java.lang.reflect.Array;
 //import java.util.ArrayList;
 
@@ -10,7 +11,14 @@ public class Main {
 
 	
 	/*
-	 You can browse this data by pointing your web browser at lpo.dt.navy.mil. 
+	 *High level design:
+	 
+	 File sources:
+	 	Environmental_Data_Deep_Moor_2012.txt
+	 	Environmental_Data_Deep_Moor_2013.txt
+	 	Environmental_Data_Deep_Moor_2014.txt
+	 	Environmental_Data_Deep_Moor_2015.txt
+	 
 	 You'll find several weather summaries, a web cam, and the raw data that they collect every five minutes, 
 	 archived as standard text files. For anyone living or working on Lake Pend Oreille, 
 	 weather statistics are an important part of every day life. 
@@ -25,7 +33,12 @@ public class Main {
 	 (recorded at the Deep Moor Station for given range of dates) 
 	 */
 	
-	private final static String FILE = "Environmental_Data_Deep_Moor_2015.txt";
+	private static String FILE;
+	private final static String FILE_2015 = "Environmental_Data_Deep_Moor_2015.txt";
+	private final static String FILE_2014 = "Environmental_Data_Deep_Moor_2014.txt";
+	private final static String FILE_2013 = "Environmental_Data_Deep_Moor_2013.txt";
+	private final static String FILE_2012 = "Environmental_Data_Deep_Moor_2012.txt";
+	
 	private final static int firstRow = 0;
 	
 	private static Double[] wind_speed;
@@ -50,7 +63,15 @@ public class Main {
 	
 	//Main method
 	public static void main(String[] args) throws IOException {
-			
+		
+		//Get year:
+		int year = getInput("Please enter a year (yyyy):");
+		int month = getInput("Please enter a month (1-12):");
+		int day = getInput("Please enter a day (1-31):");
+		
+		
+		FILE = setDataFile(year);
+		
 		int totalRows = totalLines(FILE) - 1;
 		
 		wind_speed = new Double[totalRows];
@@ -73,6 +94,45 @@ public class Main {
 						median_wind_speed, median_air_temperature, median_barometric_pressure));
 		
 	}
+	
+	
+	//Get user input
+	private static int getInput(String request){
+		
+		int input = 0;
+		Scanner scanner = new Scanner(System.in);
+		
+		System.out.println(request);
+		input = scanner.nextInt();
+		
+		return input;
+	}
+	
+	//Set data file
+	private static String setDataFile(int year){
+		
+		String fileName = "";
+		
+		switch(year){
+			
+			case 2015:
+				fileName = FILE_2015;
+				break;
+			case 2014:
+				fileName = FILE_2014;
+				break;
+			case 2013:
+				fileName = FILE_2013;
+				break;
+			case 2012:
+				fileName = FILE_2012;
+				break;
+			
+		}
+		
+		return fileName;
+	}
+	
 	
 	//Calculate and MEDIAN
 	private static double calcMedian(Double[] dataArray){
@@ -132,7 +192,7 @@ public class Main {
 	}
 	
 	
-	//Read source file and extract rellevant data from it
+	//Read source file and extract relevant data from it
 	private static void readSource(String FILE, Double[] wind_speed, Double[] air_temperature, Double[] barometric_pressure) throws IOException{
 		
 		total_wind_speed = 0.0;
