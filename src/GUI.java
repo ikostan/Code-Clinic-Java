@@ -410,7 +410,7 @@ public class GUI extends JFrame{
 		//AllBxListener
 	}
 	
-	
+	//Year combo action listener
 	private class YearListener implements ItemListener{
 
 		@Override
