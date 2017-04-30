@@ -11,13 +11,18 @@ import java.awt.event.ActionEvent;
 import javax.swing.JTextField;
 import java.awt.Color;
 import java.awt.Font;
-import javax.swing.JInternalFrame;
-import javax.swing.JSplitPane;
-import javax.swing.JTabbedPane;
+//import javax.swing.JInternalFrame;
+//import javax.swing.JSplitPane;
+//import javax.swing.JTabbedPane;
 import javax.swing.JCheckBox;
 
 public class GUI extends JFrame{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	//Class fields
 	private JTextField txtInstructions;
 	
@@ -331,25 +336,7 @@ public class GUI extends JFrame{
 		comboBox_day.setBounds(303, 63, 107, 20);
 		getContentPane().add(comboBox_day);
 	}
-	
-	/*
-	public int getYear(){
-		
-		JOptionPane.showMessageDialog(null, this.year);//Debug only
-		return this.year; //Return selected year
-	}
-	
-	public int getMonth(){
-		
-		JOptionPane.showMessageDialog(null, this.month);//Debug only
-		return this.month; //Return selected month
-	}
 
-	public int getDay(){
-		JOptionPane.showMessageDialog(null, this.day);//Debug only
-		return this.day; //Return selected day
-	}
-	*/
 	
 	
 	private class AllBxListener implements ActionListener{
