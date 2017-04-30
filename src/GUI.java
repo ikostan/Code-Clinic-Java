@@ -284,7 +284,8 @@ public class GUI extends JFrame{
 	private void setYearCombo(){
 		
 		comboBox_year = new JComboBox();
-		comboBox_year.addItemListener(new YearListener());
+		comboBox_year.addActionListener(new YearListener());
+		//comboBox_year.addItemListener(new YearListener());
 		comboBox_year.setModel(new DefaultComboBoxModel(new String[] {"2012", "2013", "2014", "2015"}));
 		comboBox_year.setBounds(24, 63, 107, 20);
 		getContentPane().add(comboBox_year);
@@ -314,9 +315,6 @@ public class GUI extends JFrame{
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			// TODO Auto-generated method stub
-			
-			//chckbxMean, chckbxMedian, chckbxAll
 			
 			String source = e.getActionCommand();
 			
@@ -334,8 +332,6 @@ public class GUI extends JFrame{
 					
 					chckbxMean.setSelected(true);
 					chckbxMedian.setSelected(true);
-					//setTxtMedianFields();
-					//setTxtMeanFields();
 				}
 				else {
 					unsetTxtMeanFields();
@@ -410,6 +406,44 @@ public class GUI extends JFrame{
 		//AllBxListener
 	}
 	
+	
+	//Year combo-box action listener:
+	private class YearListener implements ActionListener{
+
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			
+			String selected = (String) comboBox_year.getSelectedItem();	
+			//JOptionPane.showMessageDialog(null, "year selected: " + selected); //Debug only
+	
+			switch(selected){	
+			case ("2012"):
+				year = 2012;
+				break;
+			case ("2013"):
+				year = 2013;
+				break;
+			case ("2014"):
+				year = 2014;
+				break;
+			case ("2015"):
+				year = 2015;
+				break;
+			}
+			
+			if(comboBox_month.isEnabled() == false){
+				
+				comboBox_month.setEnabled(true);
+			}
+			
+			txtInstructions.setText("Please select a month");			
+		}
+		// YearListener
+	}
+	
+	
+	
+	/*
 	//Year combo action listener
 	private class YearListener implements ItemListener{
 
@@ -418,8 +452,14 @@ public class GUI extends JFrame{
 			// TODO Auto-generated method stub
 			
 			//int year = arg0.getID();
+			
+			int stateChange = arg0.getStateChange();
+			JOptionPane.showMessageDialog(null, "stateChange: " + stateChange); //Debug only
+			
+			String selected = (String) comboBox_year.getSelectedItem();
+			
 			int index = comboBox_year.getSelectedIndex();		
-			//JOptionPane.showMessageDialog(null, "year: " + index); //Debug only
+			JOptionPane.showMessageDialog(null, "year: " + index + "selected: " + selected); //Debug only
 			
 			switch(index){	
 				case (0):
@@ -447,7 +487,7 @@ public class GUI extends JFrame{
 		
 		//ActionListener
 	}
-	
+	*/
 	
 	//Set number of days according to chosen month
 	private String[] setNumDays(String month, int year){
@@ -605,6 +645,7 @@ public class GUI extends JFrame{
 		
 		//DayListener
 	}
+
 	
 	//GUI
 }
