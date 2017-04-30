@@ -10,6 +10,8 @@
 
 ## Link: https://www.lynda.com/Java-tutorials/Welcome/162454/182050-4.html
 
+### NOTE: in this implementation local text files were used as data source.
+
 ## GUI example:
 ![GUI](https://github.com/ikostan/Exploring_Lake_Pend_Oreille/blob/master/Capture.PNG?raw=true "GUI screenshot")
 
