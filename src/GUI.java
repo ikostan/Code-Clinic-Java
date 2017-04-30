@@ -18,9 +18,6 @@ import javax.swing.JCheckBox;
 
 public class GUI extends JFrame{
 	
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 
 	//Class fields
@@ -88,8 +85,7 @@ public class GUI extends JFrame{
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				
-				//Execute action:
-				
+				//Execute action:			
 				if(month != 0 && day != 0){
 					
 					Calculator myCalc = new Calculator();			

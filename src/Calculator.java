@@ -76,20 +76,23 @@ public class Calculator {
 	//Calculate data
 	public void calcData(boolean isMean, boolean isMedian){
 		
-		concatDate(year, month, day);
+		String targetDate = concatDate(year, month, day);
+		System.out.println("targetDate: " + targetDate); //DEBUG ONLY
 		
 		FILE = setDataFile(year);
 		
 		int totalRows;
 				
 		try {
-			totalRows = totalLines(FILE) - 1;
-					
+			totalRows = totalLines(FILE, targetDate);
+			
+			System.out.println("totalRows: " + totalRows); //DEBUG ONLY
+			
 			wind_speed = new Double[totalRows];
 			air_temperature = new Double[totalRows];
 			barometric_pressure = new Double[totalRows];
 					
-			readSource(FILE, wind_speed, air_temperature, barometric_pressure);
+			readSource(FILE, targetDate, wind_speed, air_temperature, barometric_pressure);
 					
 		} 
 		catch (IOException ex) {
@@ -216,21 +219,9 @@ public class Calculator {
 		return median;
 	}
 	
-	/*
-	//Calculate and display MEAN values
-	private static void clacMean(){
-			
-		mean_wind_speed = total_wind_speed  / wind_speed.length;
-		mean_air_temperature = total_air_temperature / air_temperature.length;
-		mean_barometric_pressure = total_barometric_pressure / barometric_pressure.length;
-			
-		//DEBUG ONLY:
-		//System.out.println(String.format("mean_air_temperature: %.2f, mean_air_temperature: %.2f, mean_barometric_pressure: %.2f", mean_wind_speed, mean_air_temperature, mean_barometric_pressure));
-	}
-	*/
 	
 	//Get total number of lines in the source file
-	private static int totalLines(String FILE) throws IOException{
+	private static int totalLines(String FILE, String targetDate) throws IOException{
 			
 		FileReader fileReader = new FileReader(FILE);
 		BufferedReader bufReader = new BufferedReader(fileReader);
@@ -243,7 +234,7 @@ public class Calculator {
 			try {
 				line = bufReader.readLine();
 				//System.out.println(line);
-				if(line != null){
+				if(line != null && line.contains(targetDate)){
 					i++;
 				}				
 			} catch (IOException e) {
@@ -257,7 +248,7 @@ public class Calculator {
 	}
 		
 	//Read source file and extract relevant data from it
-	private static void readSource(String FILE, Double[] wind_speed, Double[] air_temperature, Double[] barometric_pressure) throws IOException{
+	private static void readSource(String FILE, String targetDate, Double[] wind_speed, Double[] air_temperature, Double[] barometric_pressure) throws IOException{
 			
 			total_wind_speed = 0.0;
 			total_air_temperature = 0.0;
@@ -267,7 +258,7 @@ public class Calculator {
 			BufferedReader bufReader = new BufferedReader(fileReader);
 			
 			int row = 0;
-			int index;
+			int index = 0;
 			String line = "";
 			String[] dataLine;
 			
@@ -276,10 +267,11 @@ public class Calculator {
 					
 				line = bufReader.readLine(); //Read next line
 					
-				if(row != firstRow && line != null){
-								
+				if(row != firstRow && line != null && line.contains(targetDate)){
+					
+					System.out.println(line); //DEBUG ONLY
+					
 					dataLine = line.split("\t");					
-					index = row - 1; //Index for array members
 						
 					wind_speed[index] = Double.parseDouble(dataLine[7]);
 					total_wind_speed = total_wind_speed + wind_speed[index];
@@ -289,8 +281,10 @@ public class Calculator {
 						
 					barometric_pressure[index] = Double.parseDouble(dataLine[2]);
 					total_barometric_pressure = total_barometric_pressure + barometric_pressure[index];
-				}
 					
+					index++; //Index for array members
+				}
+				
 				row++; //Increment
 			}
 		} 
@@ -308,7 +302,7 @@ public class Calculator {
 		
 		String date = "";
 		date = String.format("%04d_%02d_%02d", year, month, day);
-		System.out.println(date); //DEBUG ONLY
+		//System.out.println(date); //DEBUG ONLY
 		return date;
 	}
 	
