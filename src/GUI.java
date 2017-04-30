@@ -304,7 +304,7 @@ public class GUI extends JFrame{
 	private void setDayCombo(){
 		
 		comboBox_day = new JComboBox();
-		comboBox_day.addItemListener(new DayListener());
+		comboBox_day.addActionListener(new DayListener());
 		comboBox_day.setEnabled(false);
 		comboBox_day.setBounds(303, 63, 107, 20);
 		getContentPane().add(comboBox_day);
@@ -586,19 +586,18 @@ public class GUI extends JFrame{
 	}
 	
 	
-	//
-	private class DayListener implements ItemListener{
+	//Days combo-box event handler
+	private class DayListener implements ActionListener{
 
 		@Override
-		public void itemStateChanged(ItemEvent e) {
-			// TODO Auto-generated method stub
-			
-			day = comboBox_day.getSelectedIndex();			
+		public void actionPerformed(ActionEvent e) {
+
+			day = comboBox_day.getSelectedIndex() + 1;	
+			JOptionPane.showMessageDialog(null, "day: " + day); //Debug only
 		}
-		
 		//DayListener
 	}
-
+	
 	
 	//GUI
 }
