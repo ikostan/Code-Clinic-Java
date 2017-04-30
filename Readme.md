@@ -7,7 +7,6 @@
 ## It's common to use a computer to manipulate and summarize large amounts of information. Providing important insights on how to improve or handle a situation. In this problem, we'll use weather data collected by the US Navy, from Lake Pend Oreille, in northern Idaho. As part of that testing, the US Navy compiles an exhaustive list of weather statistics, including wind speed, air temperature, and barometric pressure.
 
 ### You can browse this data by pointing your web browser at lpo.dt.navy.mil. 
-### NOTE: in this implementation local text files were used as data source.
 
 ## Link: https://www.lynda.com/Java-tutorials/Welcome/162454/182050-4.html
 
