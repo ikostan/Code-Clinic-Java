@@ -10,3 +10,6 @@
 
 ## Link: https://www.lynda.com/Java-tutorials/Welcome/162454/182050-4.html
 
+## GUI example:
+![GUI](https://github.com/ikostan/Exploring_Lake_Pend_Oreille/blob/master/Capture.PNG?raw=true "GUI screenshot")
+
