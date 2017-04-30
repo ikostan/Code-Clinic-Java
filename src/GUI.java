@@ -294,7 +294,7 @@ public class GUI extends JFrame{
 	private void setMonthCombo(){
 		
 		comboBox_month = new JComboBox();
-		comboBox_month.addItemListener(new MonthListener());
+		comboBox_month.addActionListener(new MonthListener());
 		comboBox_month.setEnabled(false);
 		comboBox_month.setModel(new DefaultComboBoxModel(new String[] {"January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"}));
 		comboBox_month.setBounds(164, 63, 107, 20);
@@ -440,54 +440,7 @@ public class GUI extends JFrame{
 		}
 		// YearListener
 	}
-	
-	
-	
-	/*
-	//Year combo action listener
-	private class YearListener implements ItemListener{
 
-		@Override
-		public void itemStateChanged(ItemEvent arg0) {
-			// TODO Auto-generated method stub
-			
-			//int year = arg0.getID();
-			
-			int stateChange = arg0.getStateChange();
-			JOptionPane.showMessageDialog(null, "stateChange: " + stateChange); //Debug only
-			
-			String selected = (String) comboBox_year.getSelectedItem();
-			
-			int index = comboBox_year.getSelectedIndex();		
-			JOptionPane.showMessageDialog(null, "year: " + index + "selected: " + selected); //Debug only
-			
-			switch(index){	
-				case (0):
-					year = 2012;
-					break;
-				case (1):
-					year = 2013;
-					break;
-				case (2):
-					year = 2014;
-					break;
-				case (3):
-					year = 2015;
-					break;
-			}
-			
-			//JOptionPane.showMessageDialog(null, "year: " + year); //Debug only			
-			if(comboBox_month.isEnabled() == false){
-				
-				comboBox_month.setEnabled(true);
-			}
-			
-			txtInstructions.setText("Please select a month");
-		}
-		
-		//ActionListener
-	}
-	*/
 	
 	//Set number of days according to chosen month
 	private String[] setNumDays(String month, int year){
@@ -606,12 +559,11 @@ public class GUI extends JFrame{
 	}
 	
 	
-	//Month combo event handler
-	private class MonthListener implements ItemListener{
+	//Months combo-box event handler
+	private class MonthListener implements ActionListener{
 
 		@Override
-		public void itemStateChanged(ItemEvent arg0) {
-			// TODO Auto-generated method stub
+		public void actionPerformed(ActionEvent e) {
 			
 			int index = comboBox_month.getSelectedIndex();
 			//JOptionPane.showMessageDialog(null, "month: " + month); //Debug only
@@ -630,10 +582,11 @@ public class GUI extends JFrame{
 			//new String[] {"1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31"}));
 			txtInstructions.setText("Please select a day");
 		}
-		
 		//MonthListener
 	}
 	
+	
+	//
 	private class DayListener implements ItemListener{
 
 		@Override
