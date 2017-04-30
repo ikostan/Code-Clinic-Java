@@ -47,7 +47,7 @@ public class Calculator {
 		
 	}
 	
-	
+	//Calculate data
 	public void calcData(){
 		
 		FILE = setDataFile(year);

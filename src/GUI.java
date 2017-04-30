@@ -34,6 +34,9 @@ public class GUI extends JFrame{
 	private JTextField textTempMean;
 	private JTextField textPressureMean;
 	
+	
+	private JCheckBox chckbxMean, chckbxMedian, chckbxAll;
+	
 	//Constructor
 	public GUI() {
 		setResizable(false);
@@ -64,7 +67,8 @@ public class GUI extends JFrame{
 		setCheckBoxes();
 		
 		//Create text fields
-		setTxtFields();
+		setTxtMedianFields();
+		setTxtMeanFields();
 		
 		//Create labels
 		setLables();
@@ -176,25 +180,55 @@ public class GUI extends JFrame{
 	
 	
 	//Create all txt fields
-	private void setTxtFields(){
+	private void setTxtMedianFields(){
 		
 		textWindMedian = new JTextField();
 		textWindMedian.setEnabled(false);
 		textWindMedian.setBounds(324, 129, 86, 20);
+		//textWindMedian.setText("");
 		getContentPane().add(textWindMedian);
 		textWindMedian.setColumns(10);
 		
 		textTempMedian = new JTextField();
+		//textTempMedian.setText("");
 		textTempMedian.setEnabled(false);
 		textTempMedian.setColumns(10);
 		textTempMedian.setBounds(324, 160, 86, 20);
 		getContentPane().add(textTempMedian);
 		
 		textPressureMedian = new JTextField();
+		//textPressureMedian.setText("");
 		textPressureMedian.setEnabled(false);
 		textPressureMedian.setColumns(10);
 		textPressureMedian.setBounds(324, 191, 86, 20);
 		getContentPane().add(textPressureMedian);
+	}
+	
+	private void unsetTxtMedianFields(){
+		
+		//textWindMedian = new JTextField();
+		textWindMedian.setEnabled(false);
+		//textWindMedian.setBounds(324, 129, 86, 20);
+		textWindMedian.setText("n/a");
+		//getContentPane().add(textWindMedian);
+		//textWindMedian.setColumns(10);
+		
+		//textTempMedian = new JTextField();
+		textTempMedian.setEnabled(false);
+		textTempMedian.setText("n/a");
+		//textTempMedian.setColumns(10);
+		//textTempMedian.setBounds(324, 160, 86, 20);
+		//getContentPane().add(textTempMedian);
+		
+		//textPressureMedian = new JTextField();
+		textPressureMedian.setEnabled(false);
+		textPressureMedian.setText("n/a");
+		//textPressureMedian.setColumns(10);
+		//textPressureMedian.setBounds(324, 191, 86, 20);
+		//getContentPane().add(textPressureMedian);
+	}	
+	
+	private void setTxtMeanFields(){
 		
 		textWindMean = new JTextField();
 		textWindMean.setEnabled(false);
@@ -215,19 +249,57 @@ public class GUI extends JFrame{
 		getContentPane().add(textPressureMean);
 	}
 	
+	private void unsetTxtMeanFields(){
+		
+		//textWindMean = new JTextField();
+		textWindMean.setEnabled(false);
+		textWindMean.setText("n/a");
+		//textWindMean.setColumns(10);
+		//textWindMean.setBounds(222, 129, 86, 20);
+		//getContentPane().add(textWindMean);
+		
+		//textTempMean = new JTextField();
+		textTempMean.setEnabled(false);
+		textTempMean.setText("n/a");
+		//textTempMean.setColumns(10);
+		//textTempMean.setBounds(222, 160, 86, 20);
+		//getContentPane().add(textTempMean);
+		
+		//textPressureMean = new JTextField();
+		textPressureMean.setEnabled(false);
+		textPressureMean.setText("n/a");
+		//textPressureMean.setColumns(10);
+		//textPressureMean.setBounds(222, 191, 86, 20);
+		//getContentPane().add(textPressureMean);
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	//Create check-boxes
 	private void setCheckBoxes(){
 		
-		JCheckBox chckbxMean = new JCheckBox("Mean");
+		chckbxMean = new JCheckBox("Mean");
+		chckbxMean.setSelected(true);
+		chckbxMean.addActionListener(new AllBxListener());
 		chckbxMean.setBounds(24, 128, 68, 23);
 		getContentPane().add(chckbxMean);
 		
-		JCheckBox chckbxMedian = new JCheckBox("Median");
+		chckbxMedian = new JCheckBox("Median");
+		chckbxMedian.setSelected(true);
+		chckbxMedian.addActionListener(new AllBxListener());
 		chckbxMedian.setBounds(24, 159, 77, 23);
 		getContentPane().add(chckbxMedian);
 		
-		JCheckBox chckbxAll = new JCheckBox("Select all");
+		chckbxAll = new JCheckBox("Select all");
+		chckbxAll.setSelected(true);
+		chckbxAll.addActionListener(new AllBxListener());
 		chckbxAll.setBounds(24, 190, 97, 23);
 		getContentPane().add(chckbxAll);
 	}
@@ -278,6 +350,108 @@ public class GUI extends JFrame{
 		return this.day; //Return selected day
 	}
 	*/
+	
+	
+	private class AllBxListener implements ActionListener{
+
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			// TODO Auto-generated method stub
+			
+			//chckbxMean, chckbxMedian, chckbxAll
+			
+			String source = e.getActionCommand();
+			
+			if(source == "Select all"){
+				//JOptionPane.showMessageDialog(null, source); //Debug only
+				if(chckbxAll.isSelected() == true){
+				
+					textWindMedian.setText("");
+					textTempMedian.setText("");
+					textPressureMedian.setText("");
+					
+					textWindMean.setText("");
+					textPressureMean.setText("");
+					textTempMean.setText("");
+					
+					chckbxMean.setSelected(true);
+					chckbxMedian.setSelected(true);
+					//setTxtMedianFields();
+					//setTxtMeanFields();
+				}
+				else {
+					unsetTxtMeanFields();
+					unsetTxtMedianFields();
+					chckbxMean.setSelected(false);
+					chckbxMedian.setSelected(false);
+				}
+			}
+			
+			if(source == "Mean"){
+				
+				if(chckbxMedian.isSelected() == true && chckbxMean.isSelected() == true){
+					
+					textWindMedian.setText("");
+					textTempMedian.setText("");
+					textPressureMedian.setText("");
+					
+					textWindMean.setText("");
+					textPressureMean.setText("");
+					textTempMean.setText("");
+					
+					chckbxAll.setSelected(true);
+				}
+				else{
+					
+					if(chckbxMean.isSelected() == false){
+						unsetTxtMeanFields();
+					}
+					else{
+						textWindMean.setText("");
+						textTempMean.setText("");
+						textPressureMean.setText("");
+					}
+					
+					chckbxAll.setSelected(false);
+				}
+				//JOptionPane.showMessageDialog(null, source); //Debug only
+				
+			}
+			
+			if(source == "Median"){
+				
+				if(chckbxMedian.isSelected() == true && chckbxMean.isSelected() == true){
+					
+					textWindMedian.setText("");
+					textTempMedian.setText("");
+					textPressureMedian.setText("");
+					
+					textWindMean.setText("");
+					textPressureMean.setText("");
+					textTempMean.setText("");
+					
+					chckbxAll.setSelected(true);
+				}
+				else{
+					chckbxAll.setSelected(false);
+					
+					if(chckbxMedian.isSelected() == false){
+						unsetTxtMedianFields();
+					}
+					else{
+						textWindMedian.setText("");
+						textTempMedian.setText("");
+						textPressureMedian.setText("");
+					}
+				}
+				//JOptionPane.showMessageDialog(null, source); //Debug only
+				
+			}
+			
+		}
+		//AllBxListener
+	}
+	
 	
 	private class YearListener implements ItemListener{
 
