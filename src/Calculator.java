@@ -76,6 +76,8 @@ public class Calculator {
 	//Calculate data
 	public void calcData(boolean isMean, boolean isMedian){
 		
+		concatDate(year, month, day);
+		
 		FILE = setDataFile(year);
 		
 		int totalRows;
@@ -120,7 +122,7 @@ public class Calculator {
 			this.median_barometric_pressure = 0.0;
 		}
 		
-		/*
+		
 		//Print the results - DEBUG ONLY
 		System.out.println(
 				String.format(
@@ -136,7 +138,7 @@ public class Calculator {
 						+ "mean_barometric_pressure: %.2f", 
 						mean_wind_speed, mean_air_temperature, mean_barometric_pressure));
 
-		*/
+		
 	}
 	
 	
@@ -301,6 +303,15 @@ public class Calculator {
 		fileReader.close();
 	}
 
+	
+	private String concatDate(int year, int month, int day){
+		
+		String date = "";
+		date = String.format("%04d_%02d_%02d", year, month, day);
+		System.out.println(date); //DEBUG ONLY
+		return date;
+	}
+	
 	//End
 
 }

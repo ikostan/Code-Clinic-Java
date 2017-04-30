@@ -296,7 +296,9 @@ public class GUI extends JFrame{
 		comboBox_month = new JComboBox();
 		comboBox_month.addActionListener(new MonthListener());
 		comboBox_month.setEnabled(false);
-		comboBox_month.setModel(new DefaultComboBoxModel(new String[] {"January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"}));
+		comboBox_month.setModel(
+				new DefaultComboBoxModel(
+						new String[] {"January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"}));
 		comboBox_month.setBounds(164, 63, 107, 20);
 		getContentPane().add(comboBox_month);
 	}
@@ -311,6 +313,7 @@ public class GUI extends JFrame{
 	}
 
 	
+	//All check-box event handler
 	private class AllBxListener implements ActionListener{
 
 		@Override
@@ -593,7 +596,8 @@ public class GUI extends JFrame{
 		public void actionPerformed(ActionEvent e) {
 
 			day = comboBox_day.getSelectedIndex() + 1;	
-			JOptionPane.showMessageDialog(null, "day: " + day); //Debug only
+			//JOptionPane.showMessageDialog(null, "day: " + day); //Debug only
+			txtInstructions.setText("Please select what do you want to calculate");
 		}
 		//DayListener
 	}
