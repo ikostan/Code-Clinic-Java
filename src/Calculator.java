@@ -42,13 +42,39 @@ public class Calculator {
 		//Get year:
 		//int year = getInput("Please enter a year (yyyy):");
 		//int month = getInput("Please enter a month (1-12):");
-		//int day = getInput("Please enter a day (1-31):");
-					
-		
+		//int day = getInput("Please enter a day (1-31):");		
 	}
 	
+		
+	//MEAN getters
+	public double getMeanWindSpeed(){		
+		return this.mean_wind_speed;
+	}
+		
+	public double getMeanAirTemperature(){		
+		return this.mean_air_temperature;
+	}	
+	
+	public double getMeanBarometricPressure(){		
+		return this.mean_barometric_pressure;
+	}
+	
+	//MEDIAN getters
+	public double getMedianWindSpeed(){
+		return this.median_wind_speed;
+	}
+	
+	public double getMedianAirTemperature(){
+		return this.median_air_temperature;
+	}
+	
+	public double getMedianBarometricPressure(){
+		return this.median_barometric_pressure;
+	}
+	
+	
 	//Calculate data
-	public void calcData(){
+	public void calcData(boolean isMean, boolean isMedian){
 		
 		FILE = setDataFile(year);
 		
@@ -71,13 +97,30 @@ public class Calculator {
 			System.out.println(ex.getMessage());
 		}
 				
-		clacMean();
-
-		median_wind_speed = calcMedian(wind_speed);
-		median_air_temperature = calcMedian(air_temperature);
-		median_barometric_pressure = calcMedian(barometric_pressure);
+		if(isMean == true){
+			//clacMean();
+			this.mean_wind_speed = total_wind_speed  / wind_speed.length;
+			this.mean_air_temperature = total_air_temperature / air_temperature.length;
+			this.mean_barometric_pressure = total_barometric_pressure / barometric_pressure.length;
+		}
+		else{
+			this.mean_wind_speed = 0.0;
+			this.mean_air_temperature = 0.0;
+			this.mean_barometric_pressure = 0.0;
+		}
 		
+		if(isMedian == true){
+			this.median_wind_speed = calcMedian(wind_speed);
+			this.median_air_temperature = calcMedian(air_temperature);
+			this.median_barometric_pressure = calcMedian(barometric_pressure);
+		}
+		else{
+			this.median_wind_speed = 0.0;
+			this.median_air_temperature = 0.0;
+			this.median_barometric_pressure = 0.0;
+		}
 		
+		/*
 		//Print the results - DEBUG ONLY
 		System.out.println(
 				String.format(
@@ -86,6 +129,14 @@ public class Calculator {
 					+ "median_barometric_pressure: %.2f", 
 					median_wind_speed, median_air_temperature, median_barometric_pressure));
 		
+		System.out.println(
+				String.format(
+						"mean_wind_temperature: %.2f, "
+						+ "mean_air_temperature: %.2f, "
+						+ "mean_barometric_pressure: %.2f", 
+						mean_wind_speed, mean_air_temperature, mean_barometric_pressure));
+
+		*/
 	}
 	
 	
@@ -162,7 +213,8 @@ public class Calculator {
 		
 		return median;
 	}
-		
+	
+	/*
 	//Calculate and display MEAN values
 	private static void clacMean(){
 			
@@ -170,9 +222,11 @@ public class Calculator {
 		mean_air_temperature = total_air_temperature / air_temperature.length;
 		mean_barometric_pressure = total_barometric_pressure / barometric_pressure.length;
 			
-		System.out.println(String.format("mean_air_temperature: %.2f, mean_air_temperature: %.2f, mean_barometric_pressure: %.2f", mean_wind_speed, mean_air_temperature, mean_barometric_pressure));
+		//DEBUG ONLY:
+		//System.out.println(String.format("mean_air_temperature: %.2f, mean_air_temperature: %.2f, mean_barometric_pressure: %.2f", mean_wind_speed, mean_air_temperature, mean_barometric_pressure));
 	}
-		
+	*/
+	
 	//Get total number of lines in the source file
 	private static int totalLines(String FILE) throws IOException{
 			

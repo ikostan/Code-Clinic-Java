@@ -38,8 +38,7 @@ public class GUI extends JFrame{
 	private JTextField textWindMean;
 	private JTextField textTempMean;
 	private JTextField textPressureMean;
-	
-	
+		
 	private JCheckBox chckbxMean, chckbxMedian, chckbxAll;
 	
 	//Constructor
@@ -97,7 +96,23 @@ public class GUI extends JFrame{
 					myCalc.setYear(year);
 					myCalc.setMonth(month);
 					myCalc.setDay(day);
-					myCalc.calcData();
+					
+					myCalc.calcData(chckbxMean.isSelected(), chckbxMedian.isSelected());
+					
+					if(chckbxMean.isSelected()){
+						//****
+						textWindMean.setText(String.format("%.2f", myCalc.getMeanWindSpeed()));
+						textTempMean.setText(String.format("%.2f", myCalc.getMeanAirTemperature()));
+						textPressureMean.setText(String.format("%.2f", myCalc.getMeanBarometricPressure()));		
+					}
+					
+					if(chckbxMedian.isSelected()){
+						
+						textWindMedian.setText(Double.toString(myCalc.getMedianWindSpeed()));
+						textTempMedian.setText(Double.toString(myCalc.getMedianAirTemperature()));
+						textPressureMedian.setText(Double.toString(myCalc.getMedianBarometricPressure()));
+					}
+									
 				}
 				else{
 					
@@ -211,26 +226,9 @@ public class GUI extends JFrame{
 	
 	private void unsetTxtMedianFields(){
 		
-		//textWindMedian = new JTextField();
-		textWindMedian.setEnabled(false);
-		//textWindMedian.setBounds(324, 129, 86, 20);
 		textWindMedian.setText("n/a");
-		//getContentPane().add(textWindMedian);
-		//textWindMedian.setColumns(10);
-		
-		//textTempMedian = new JTextField();
-		textTempMedian.setEnabled(false);
 		textTempMedian.setText("n/a");
-		//textTempMedian.setColumns(10);
-		//textTempMedian.setBounds(324, 160, 86, 20);
-		//getContentPane().add(textTempMedian);
-		
-		//textPressureMedian = new JTextField();
-		textPressureMedian.setEnabled(false);
 		textPressureMedian.setText("n/a");
-		//textPressureMedian.setColumns(10);
-		//textPressureMedian.setBounds(324, 191, 86, 20);
-		//getContentPane().add(textPressureMedian);
 	}	
 	
 	private void setTxtMeanFields(){
@@ -255,37 +253,11 @@ public class GUI extends JFrame{
 	}
 	
 	private void unsetTxtMeanFields(){
-		
-		//textWindMean = new JTextField();
-		textWindMean.setEnabled(false);
+
 		textWindMean.setText("n/a");
-		//textWindMean.setColumns(10);
-		//textWindMean.setBounds(222, 129, 86, 20);
-		//getContentPane().add(textWindMean);
-		
-		//textTempMean = new JTextField();
-		textTempMean.setEnabled(false);
 		textTempMean.setText("n/a");
-		//textTempMean.setColumns(10);
-		//textTempMean.setBounds(222, 160, 86, 20);
-		//getContentPane().add(textTempMean);
-		
-		//textPressureMean = new JTextField();
-		textPressureMean.setEnabled(false);
 		textPressureMean.setText("n/a");
-		//textPressureMean.setColumns(10);
-		//textPressureMean.setBounds(222, 191, 86, 20);
-		//getContentPane().add(textPressureMean);
 	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
 	
 	//Create check-boxes
 	private void setCheckBoxes(){
@@ -337,7 +309,6 @@ public class GUI extends JFrame{
 		getContentPane().add(comboBox_day);
 	}
 
-	
 	
 	private class AllBxListener implements ActionListener{
 
