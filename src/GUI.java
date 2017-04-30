@@ -17,11 +17,15 @@ import javax.swing.JTabbedPane;
 import javax.swing.JCheckBox;
 
 public class GUI extends JFrame{
+	
+	//Class fields
 	private JTextField txtInstructions;
 	
 	private static int year;
 	private static int month;
+	private static String monthStr;
 	private static int day;
+	
 	private JComboBox comboBox_year, comboBox_month, comboBox_day;
 	private JTextField textWindMedian;
 	private JTextField textTempMedian;
@@ -30,7 +34,7 @@ public class GUI extends JFrame{
 	private JTextField textTempMean;
 	private JTextField textPressureMean;
 	
-	//Cpnstructor
+	//Constructor
 	public GUI() {
 		setResizable(false);
 		this.setSize(450,300); //Window size
@@ -62,7 +66,7 @@ public class GUI extends JFrame{
 		//Create text fields
 		setTxtFields();
 		
-		//Create lables
+		//Create labels
 		setLables();
 		
 		this.setVisible(true); //Set window visible
@@ -73,6 +77,30 @@ public class GUI extends JFrame{
 	private void setExeBtn(){
 		
 		JButton btnNewButton = new JButton("Execute");
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				
+				//Execute action:
+				
+				if(month != 0 && day != 0){
+					
+					Calculator myCalc = new Calculator();			
+					myCalc.setYear(year);
+					myCalc.setMonth(month);
+					myCalc.setDay(day);
+					myCalc.calcData();
+				}
+				else{
+					
+					//Display error dialogue
+					JOptionPane.showMessageDialog(null,
+							String.format("Please select month and day first:\n %d %d %d", year, month, day),
+						    "Program error",
+						    JOptionPane.ERROR_MESSAGE);
+				}
+				
+			}
+		});
 		btnNewButton.setBounds(222, 227, 86, 23);
 		getContentPane().add(btnNewButton);
 	}
@@ -110,7 +138,7 @@ public class GUI extends JFrame{
 	}
 	
 	
-	//Create all lables
+	//Create all labels
 	private void setLables(){
 				
 		JLabel lblPleaseSelectA = new JLabel("Select a year:");
@@ -232,23 +260,24 @@ public class GUI extends JFrame{
 		getContentPane().add(comboBox_day);
 	}
 	
+	/*
 	public int getYear(){
 		
-		JOptionPane.showMessageDialog(null, this.year);
+		JOptionPane.showMessageDialog(null, this.year);//Debug only
 		return this.year; //Return selected year
 	}
 	
 	public int getMonth(){
 		
-		JOptionPane.showMessageDialog(null, this.month);
+		JOptionPane.showMessageDialog(null, this.month);//Debug only
 		return this.month; //Return selected month
 	}
 
 	public int getDay(){
-		JOptionPane.showMessageDialog(null, this.day);
+		JOptionPane.showMessageDialog(null, this.day);//Debug only
 		return this.day; //Return selected day
 	}
-	
+	*/
 	
 	private class YearListener implements ItemListener{
 
@@ -256,24 +285,26 @@ public class GUI extends JFrame{
 		public void itemStateChanged(ItemEvent arg0) {
 			// TODO Auto-generated method stub
 			
-			int year = arg0.getID();
-
-			switch(year){
+			//int year = arg0.getID();
+			int index = comboBox_year.getSelectedIndex();		
+			//JOptionPane.showMessageDialog(null, "year: " + index); //Debug only
 			
-			case (2012):
-				year = 2012;
-				break;
-			case (2013):
-				year = 2013;
-				break;
-			case (2014):
-				year = 2014;
-				break;
-			case (2015):
-				year = 2015;
-				break;
+			switch(index){	
+				case (0):
+					year = 2012;
+					break;
+				case (1):
+					year = 2013;
+					break;
+				case (2):
+					year = 2014;
+					break;
+				case (3):
+					year = 2015;
+					break;
 			}
 			
+			//JOptionPane.showMessageDialog(null, "year: " + year); //Debug only			
 			if(comboBox_month.isEnabled() == false){
 				
 				comboBox_month.setEnabled(true);
@@ -286,22 +317,145 @@ public class GUI extends JFrame{
 	}
 	
 	
+	//Set number of days according to chosen month
+	private String[] setNumDays(String month, int year){
+		
+		int i = 0;
+		
+		switch(month){
+			case("January"):
+				i = 31;
+				break;
+			case("February"):
+				if(year == 2012){			
+					i = 29;
+				}
+				else {
+					i = 28;
+				}
+				break;
+			case("March"):
+				i = 31;
+				break;
+			case("April"):
+				i = 30;
+				break;
+			case("May"):
+				i = 31;
+				break;
+			case("June"):
+				i = 30;
+				break;
+			case("July"):
+				i = 31;
+				break;
+			case("August"):
+				i = 31;
+				break;
+			case("September"):
+				i = 30;
+				break;
+			case("October"):
+				i = 31;
+				break;
+			case("November"):
+				i = 30;
+				break;
+			case("December"):
+				i = 31;
+				break;		
+		}
+		
+		String[] daysArray = new String[i];	
+		
+		for(int index = 0; index < i; index++){
+			
+			daysArray[index] = Integer.toString(index + 1);
+		}
+		
+		return daysArray;		
+	}
+	
+	
+	//Set month
+	private void setMonth(int index){
+		
+		switch(index){
+		case(0):
+			month = 1;
+			monthStr = "January";
+			break;
+		case(1):
+			month = 2;
+			monthStr = "February";
+			break;
+		case(2):
+			month = 3;
+			monthStr = "March";
+			break;
+		case(3):
+			month = 4;
+			monthStr = "April";
+			break;
+		case(4):
+			month = 5;
+			monthStr = "May";
+			break;
+		case(5):
+			month = 6;
+			monthStr = "June";
+			break;
+		case(6):
+			month = 7;
+			monthStr = "July";
+			break;
+		case(7):
+			month = 8;
+			monthStr = "August";
+			break;
+		case(8):
+			month = 9;
+			monthStr = "September";
+			break;
+		case(9):
+			month = 10;
+			monthStr = "October";
+			break;
+		case(10):
+			month = 11;
+			monthStr = "November";
+			break;
+		case(11):
+			month = 12;
+			monthStr = "December";
+			break;		
+		}
+		
+	}
+	
+	
+	//Month combo event handler
 	private class MonthListener implements ItemListener{
 
 		@Override
 		public void itemStateChanged(ItemEvent arg0) {
 			// TODO Auto-generated method stub
 			
-			int month = arg0.getID();
-			JOptionPane.showMessageDialog(null, "month: " + month);
-
-			
+			int index = comboBox_month.getSelectedIndex();
+			//JOptionPane.showMessageDialog(null, "month: " + month); //Debug only
+					
 			if(comboBox_day.isEnabled() == false){
 				
 				comboBox_day.setEnabled(true);
 			}
 			
-			comboBox_day.setModel(new DefaultComboBoxModel(new String[] {"1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31"}));
+			 setMonth(index);
+			 //JOptionPane.showMessageDialog(null, "month: " + month + " " + monthStr); //Debug only
+			 
+			//Set days combo
+			String[] days = setNumDays(monthStr, year);		
+			comboBox_day.setModel(new DefaultComboBoxModel(days));
+			//new String[] {"1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31"}));
 			txtInstructions.setText("Please select a day");
 		}
 		
@@ -314,8 +468,11 @@ public class GUI extends JFrame{
 		public void itemStateChanged(ItemEvent e) {
 			// TODO Auto-generated method stub
 			
+			day = comboBox_day.getSelectedIndex();			
 		}
 		
 		//DayListener
 	}
+	
+	//GUI
 }

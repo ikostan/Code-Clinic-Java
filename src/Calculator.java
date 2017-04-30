@@ -11,6 +11,10 @@ public class Calculator {
 	private final static String FILE_2013 = "Environmental_Data_Deep_Moor_2013.txt";
 	private final static String FILE_2012 = "Environmental_Data_Deep_Moor_2012.txt";
 	
+	private static int year;
+	private static int month;
+	private static int day;
+	
 	private final static int firstRow = 0;
 	
 	private static Double[] wind_speed;
@@ -36,12 +40,18 @@ public class Calculator {
 	public Calculator(){
 		
 		//Get year:
-		int year = getInput("Please enter a year (yyyy):");
-		int month = getInput("Please enter a month (1-12):");
-		int day = getInput("Please enter a day (1-31):");
+		//int year = getInput("Please enter a year (yyyy):");
+		//int month = getInput("Please enter a month (1-12):");
+		//int day = getInput("Please enter a day (1-31):");
 					
+		
+	}
+	
+	
+	public void calcData(){
+		
 		FILE = setDataFile(year);
-				
+		
 		int totalRows;
 				
 		try {
@@ -67,7 +77,8 @@ public class Calculator {
 		median_air_temperature = calcMedian(air_temperature);
 		median_barometric_pressure = calcMedian(barometric_pressure);
 		
-		//Print the results
+		
+		//Print the results - DEBUG ONLY
 		System.out.println(
 				String.format(
 					"median_wind_speed: %.2f, "
@@ -78,17 +89,30 @@ public class Calculator {
 	}
 	
 	
+	public void setYear(int newYear){
+		
+		this.year = newYear;
+	}
+	
+	public void setMonth(int newMonth){
+		this.month = newMonth;
+	}
+	
+	public void setDay(int newDay){
+		this.day = newDay;
+	}
+	
 	//Get user input
-		private static int getInput(String request){
+	private static int getInput(String request){
 			
-			int input = 0;
-			Scanner scanner = new Scanner(System.in);
+		int input = 0;
+		Scanner scanner = new Scanner(System.in);
 			
-			System.out.println(request);
+		System.out.println(request);
 			input = scanner.nextInt();
 			
-			return input;
-		}
+		return input;
+	}
 		
 	//Set data file
 	private static String setDataFile(int year){

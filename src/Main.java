@@ -26,15 +26,11 @@ public class Main {
 	 
 	 (recorded at the Deep Moor Station for given range of dates) 
 	 */
-	
-	
 
 	//Main method
 	public static void main(String[] args) {
 		
-		//new Calculator();
-		new GUI();
-		
+		new GUI();		
 	}
 	
 	//End
