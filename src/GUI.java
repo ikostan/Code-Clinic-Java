@@ -226,6 +226,8 @@ public class GUI extends JFrame{
 		getContentPane().add(textTempMedian);
 		
 		textPressureMedian = new JTextField();
+		textPressureMedian.setForeground(Color.BLACK);
+		textPressureMedian.setFont(new Font("Tahoma", Font.BOLD, 11));
 		//textPressureMedian.setText("");
 		textPressureMedian.setEnabled(false);
 		textPressureMedian.setColumns(10);
@@ -243,18 +245,24 @@ public class GUI extends JFrame{
 	private void setTxtMeanFields(){
 		
 		textWindMean = new JTextField();
+		textWindMean.setFont(new Font("Tahoma", Font.BOLD, 11));
+		textWindMean.setForeground(Color.RED);
 		textWindMean.setEnabled(false);
 		textWindMean.setColumns(10);
 		textWindMean.setBounds(222, 129, 86, 20);
 		getContentPane().add(textWindMean);
 		
 		textTempMean = new JTextField();
+		textTempMean.setForeground(Color.RED);
+		textTempMean.setFont(new Font("Tahoma", Font.BOLD, 11));
 		textTempMean.setEnabled(false);
 		textTempMean.setColumns(10);
 		textTempMean.setBounds(222, 160, 86, 20);
 		getContentPane().add(textTempMean);
 		
 		textPressureMean = new JTextField();
+		textPressureMean.setForeground(Color.RED);
+		textPressureMean.setFont(new Font("Tahoma", Font.BOLD, 11));
 		textPressureMean.setEnabled(false);
 		textPressureMean.setColumns(10);
 		textPressureMean.setBounds(222, 191, 86, 20);

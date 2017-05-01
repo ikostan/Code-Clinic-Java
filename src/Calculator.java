@@ -82,7 +82,7 @@ public class Calculator {
 	public void calcData(boolean isMean, boolean isMedian){
 		
 		String targetDate = concatDate(year, month, day);
-		System.out.println("targetDate: " + targetDate); //DEBUG ONLY
+		//System.out.println("targetDate: " + targetDate); //DEBUG ONLY
 		
 		FILE = setDataFile(year);
 		
@@ -91,7 +91,7 @@ public class Calculator {
 		try {
 			totalRows = totalLines(FILE, targetDate);
 			
-			System.out.println("totalRows: " + totalRows); //DEBUG ONLY
+			//System.out.println("totalRows: " + totalRows); //DEBUG ONLY
 			
 			if(totalRows > 0){
 				
@@ -133,7 +133,7 @@ public class Calculator {
 			this.median_barometric_pressure = 0.0;
 		}
 		
-		
+		/*
 		//Print the results - DEBUG ONLY
 		System.out.println(
 				String.format(
@@ -148,7 +148,7 @@ public class Calculator {
 						+ "mean_air_temperature: %.2f, "
 						+ "mean_barometric_pressure: %.2f", 
 						mean_wind_speed, mean_air_temperature, mean_barometric_pressure));
-
+	*/
 		
 	}
 	
@@ -277,7 +277,7 @@ public class Calculator {
 					
 				if(row != firstRow && line != null && line.contains(targetDate)){
 					
-					System.out.println(line); //DEBUG ONLY
+					//System.out.println(line); //DEBUG ONLY
 					
 					dataLine = line.split("\t");					
 						
