@@ -97,16 +97,29 @@ public class GUI extends JFrame{
 					
 					if(chckbxMean.isSelected()){
 						//****
-						textWindMean.setText(String.format("%.2f", myCalc.getMeanWindSpeed()));
-						textTempMean.setText(String.format("%.2f", myCalc.getMeanAirTemperature()));
-						textPressureMean.setText(String.format("%.2f", myCalc.getMeanBarometricPressure()));		
+						if(myCalc.getTotalRows() > 0){
+							textWindMean.setText(String.format("%.2f", myCalc.getMeanWindSpeed()));
+							textTempMean.setText(String.format("%.2f", myCalc.getMeanAirTemperature()));
+							textPressureMean.setText(String.format("%.2f", myCalc.getMeanBarometricPressure()));	
+						}
+						else{
+							textWindMean.setText(String.format("no data"));
+							textTempMean.setText(String.format("no data"));
+							textPressureMean.setText(String.format("no data"));	
+						}
 					}
 					
 					if(chckbxMedian.isSelected()){
-						
-						textWindMedian.setText(Double.toString(myCalc.getMedianWindSpeed()));
-						textTempMedian.setText(Double.toString(myCalc.getMedianAirTemperature()));
-						textPressureMedian.setText(Double.toString(myCalc.getMedianBarometricPressure()));
+						if(myCalc.getTotalRows() > 0){
+							textWindMedian.setText(String.format("%.2f", myCalc.getMedianWindSpeed()));
+							textTempMedian.setText(String.format("%.2f", myCalc.getMedianAirTemperature()));
+							textPressureMedian.setText(String.format("%.2f", myCalc.getMedianBarometricPressure()));
+						}
+						else{
+							textWindMedian.setText(String.format("no data"));
+							textTempMedian.setText(String.format("no data"));
+							textPressureMedian.setText(String.format("no data"));
+						}
 					}
 									
 				}

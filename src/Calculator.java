@@ -15,6 +15,8 @@ public class Calculator {
 	private static int month;
 	private static int day;
 	
+	private static int totalRows;
+	
 	private final static int firstRow = 0;
 	
 	private static Double[] wind_speed;
@@ -72,6 +74,9 @@ public class Calculator {
 		return this.median_barometric_pressure;
 	}
 	
+	public int getTotalRows(){		
+		return this.totalRows;
+	}
 	
 	//Calculate data
 	public void calcData(boolean isMean, boolean isMedian){
@@ -81,18 +86,21 @@ public class Calculator {
 		
 		FILE = setDataFile(year);
 		
-		int totalRows;
+		totalRows = 0;
 				
 		try {
 			totalRows = totalLines(FILE, targetDate);
 			
 			System.out.println("totalRows: " + totalRows); //DEBUG ONLY
 			
-			wind_speed = new Double[totalRows];
-			air_temperature = new Double[totalRows];
-			barometric_pressure = new Double[totalRows];
-					
-			readSource(FILE, targetDate, wind_speed, air_temperature, barometric_pressure);
+			if(totalRows > 0){
+				
+				wind_speed = new Double[totalRows];
+				air_temperature = new Double[totalRows];
+				barometric_pressure = new Double[totalRows];
+						
+				readSource(FILE, targetDate, wind_speed, air_temperature, barometric_pressure);
+			}
 					
 		} 
 		catch (IOException ex) {
@@ -102,7 +110,7 @@ public class Calculator {
 			System.out.println(ex.getMessage());
 		}
 				
-		if(isMean == true){
+		if(isMean == true && totalRows > 0){
 			//clacMean();
 			this.mean_wind_speed = total_wind_speed  / wind_speed.length;
 			this.mean_air_temperature = total_air_temperature / air_temperature.length;
@@ -114,7 +122,7 @@ public class Calculator {
 			this.mean_barometric_pressure = 0.0;
 		}
 		
-		if(isMedian == true){
+		if(isMedian == true && totalRows > 0){
 			this.median_wind_speed = calcMedian(wind_speed);
 			this.median_air_temperature = calcMedian(air_temperature);
 			this.median_barometric_pressure = calcMedian(barometric_pressure);
